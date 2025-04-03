@@ -1,18 +1,41 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
+import City from './components/City.vue'
+import { watch } from 'vue'
+import { useRoute } from 'vue-router'
+
+const route = useRoute()
+
+// Objeto com os backgrounds para cada rota
+const backgrounds = {
+  home: 'src/assets/backgrounds/default.webp',
+  salvador: 'src/assets/backgrounds/salvador.webp',
+  maceio: 'src/assets/backgrounds/maceio.webp',
+}
+
+const updateBackground = () => {
+  const imagePath =
+    route.name && backgrounds[route.name as keyof typeof backgrounds]
+      ? backgrounds[route.name as keyof typeof backgrounds]
+      : 'src/assets/backgrounds/default.webp'
+  document.body.style.backgroundImage = `url(${imagePath})`
+}
+
+// Assistindo mudanças de rota para atualizar o background
+watch(() => route.name, updateBackground)
+
+// Atualiza o background ao carregar
+updateBackground()
 </script>
 
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
     <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+      <City msg="Bem vindo(a)" />
 
       <nav>
         <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
+        <RouterLink to="/salvador">Salvador</RouterLink>
+        <RouterLink to="/maceio">Maceió</RouterLink>
       </nav>
     </div>
   </header>

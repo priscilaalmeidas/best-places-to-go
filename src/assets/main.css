@@ -1,10 +1,17 @@
 @import './base.css';
-
+body {
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
 #app {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
+  border-radius: 10px;
   font-weight: normal;
+  background-color: rgba(1, 1, 1, 0.7);
 }
 
 a,
@@ -30,6 +37,5 @@ a,
   #app {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    padding: 0 2rem;
   }
 }
