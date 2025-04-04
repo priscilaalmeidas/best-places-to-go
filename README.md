@@ -4,11 +4,11 @@ Projeto 2 - Pós-graduação em front-end - Vue3
 
 This template should help get you started developing with Vue 3 in Vite.
 
-##MVP
+## MVP
 Próximos passos:
-Adicionar testes,
-Linkar com o banco
-Inserir mais cidades
+ - Adicionar testes,
+ - Linkar com o banco,
+ - Inserir mais cidades
 
 ## Recommended IDE Setup
 
