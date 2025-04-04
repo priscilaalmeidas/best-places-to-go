@@ -73,6 +73,8 @@ nav a {
   display: inline-block;
   padding: 0 1rem;
   border-left: 1px solid var(--color-border);
+  color: hsla(160, 100%, 37%, 1);
+  text-decoration: none;
 }
 
 nav a:first-of-type {

@@ -4,26 +4,23 @@ import HowToGoIcon from './icons/IconHowToGo.vue'
 import WhereToStayIcon from './icons/IconWhereToStay.vue'
 import ExploreIcon from './icons/IconExplore.vue'
 import FoodPlaceIcon from './icons/IconFoodPlace.vue'
-import InSalvador from './arrive/InSalvador.vue'
-import InMaceio from './arrive/InMaceio.vue'
+import { ref } from 'vue'
+import type { Ref } from 'vue'
+import Modal from './Modal.vue'
 
-const openReadmeInEditor = () => fetch('/__open-in-editor?file=README.md')
-//criar um método para abrir modal
-const openModal = (routeName: any) => {
-  let component
-  if (routeName === 'salvador') {
-    component = InSalvador
-  } else if (routeName === 'maceio') {
-    component = InMaceio
-  }
-  // Aqui você pode abrir o modal com o componente desejado
-  // Por exemplo, usando um plugin de modal ou uma biblioteca de UI
-  console.log('Abrindo modal com componente:', component)
+const modalRef: Ref<InstanceType<typeof Modal> | null> = ref(null)
+const modalTitle = ref('')
+const modalContent = ref('')
+
+const openModal = (title: string, content: string) => {
+  modalTitle.value = title
+  modalContent.value = content
+  modalRef.value?.showModal()
 }
 </script>
 <template>
   <div v-if="$route.name != 'home'">
-    <WelcomeItem @click="openModal($route.name)">
+    <WelcomeItem @click="openModal('Como Chegar', String($route.name))">
       <template #icon>
         <HowToGoIcon />
       </template>
@@ -34,7 +31,7 @@ const openModal = (routeName: any) => {
       </template>
     </WelcomeItem>
 
-    <WelcomeItem>
+    <WelcomeItem @click="openModal('Onde Ficar', String($route.name))">
       <template #icon>
         <WhereToStayIcon />
       </template>
@@ -45,7 +42,7 @@ const openModal = (routeName: any) => {
       </template>
     </WelcomeItem>
 
-    <WelcomeItem>
+    <WelcomeItem @click="openModal('O Que Fazer', String($route.name))">
       <template #icon>
         <ExploreIcon />
       </template>
@@ -56,7 +53,7 @@ const openModal = (routeName: any) => {
       </template>
     </WelcomeItem>
 
-    <WelcomeItem>
+    <WelcomeItem @click="openModal('Onde Comer', String($route.name))">
       <template #icon>
         <FoodPlaceIcon />
       </template>
@@ -66,6 +63,7 @@ const openModal = (routeName: any) => {
         recomendações de locais para comer.
       </template>
     </WelcomeItem>
+    <Modal ref="modalRef" :title="modalTitle" :content="modalContent" />
   </div>
   <div v-else>
     <p></p>
